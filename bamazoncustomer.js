@@ -134,16 +134,16 @@ buyThings = function () {
         choice = parseInt(answer.choice);
         amount = parseInt(answer.amount);
         if (isNaN(choice) || isNaN(amount)) {
-            console.log("You must input a number for each question. Please try again.");
-            buyThings();
+            console.log("\n\n\n ************************************************* \n\n\n You must input a number for each question. Please try again.\n\n\n ************************************************* \n\n\n");
+            setTimeout(buyThings, 3000);
         } else {
             connection.query("SELECT stock_quantity, price FROM products WHERE item_id = " + choice, function (err, res) {
                 if (err) throw err;
                 quantity = res[0].stock_quantity;
                 price = res[0].price;
                 if (quantity < amount) {
-                    console.log("Insufficient Quantity in stock! Please try again");
-                    buyThings();
+                    console.log("\n\n\n ************************************************* \n\n\n Insufficient Quantity in stock! Please try again \n\n\n ************************************************* \n\n\n");
+                    setTimeout(buyThings, 3000);
                 } else {
                     console.log("\n\n\n ************************************************* \n\n\n" + colors.rainbow("       Congratulations") + " on your new purchase! \n\n\n ************************************************* \n\n\n");
                     var newAmount = quantity - amount;
