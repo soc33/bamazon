@@ -6,12 +6,13 @@ var username;
 var password;
 var count;
 var changes;
+var tries=2;
 
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "password5",
+    password: "",
     database: "bamazon_db"
 });
 
@@ -49,10 +50,12 @@ checkForCode = function () {
     if (parseInt(password) === 3306) {
         createUser();
     } else if (count < 3) {
-        console.log("\n\n\n ************************************************* \n\n\n" + colors.red("WARNING Wrong password, you will only be allowed 2 more tries") + "\n\n\n ************************************************* \n\n\n");
+        console.log("\n\n\n ************************************************* \n\n\n" + colors.red("WARNING Wrong password, you will only be allowed " + tries + " more tries") + "\n\n\n ************************************************* \n\n\n");
+        tries--;
         login();
     } else {
         console.log(colors.red("You have exceeded the number of tries allowed, please try again later. Goodbye!"));
+        connection.end();
     }
 }
 

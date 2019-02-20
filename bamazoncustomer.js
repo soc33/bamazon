@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "password5",
+    password: "",
     database: "bamazon_db"
 });
 
@@ -172,7 +172,7 @@ updateTotal = function () {
 checkTotal = function () {
     connection.query("SELECT money_spent FROM users WHERE ?", user, function (err, res) {
         if (err) throw err;
-        console.log("\n\n\n ************************************************* \n\n\n        You've spent " + res[0].money_spent + " dollars \n\n\n ************************************************* \n\n\n ");
+        console.log("\n\n\n ************************************************* \n\n\n        You've spent $" + res[0].money_spent + " dollars \n\n\n ************************************************* \n\n\n ");
         setTimeout(start, 3000);
-    })
+    });
 }
